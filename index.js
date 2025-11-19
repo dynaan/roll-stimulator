@@ -13,9 +13,9 @@ function rollDice() {
   
   // Add the random roll to the base value to get the specific die face's Unicode
   const targetUnicode = baseUnicode + randomRoll;
-
+  
   historyList.push(targetUnicode);
- 
+  updateRollHistory();
     
   // Convert the Unicode number to a character and return it
   return String.fromCharCode(targetUnicode);
@@ -24,16 +24,21 @@ function rollDice() {
 
 function updateRollHistory(){
    rollH.innerHTML=``;
+   
    for(let i = 0;i<historyList.length;i++) {
-    const listItem = document.createElement("ul");
-    listItem.innerHTML=`Roll ${i+1} : <span>${rollDice(historyList[i])}</span>`;
-    rollH.appendChild(listItem);
+      const ul = document.createElement('ul');
+      rollH.appendChild(ul);
+      const char = String.fromCharCode(historyList[i]);
+      ul.innerHTML=`<span> Roll ${i+1} : ${char} </span>`;
+      
+     
    }
+  
 }
 
 
 rollBtn.addEventListener('click',()=>{
-     
+       
       
       dice.classList.add("roll-animation");
       setTimeout(()=>{
